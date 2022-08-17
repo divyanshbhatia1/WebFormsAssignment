@@ -1,0 +1,40 @@
+CREATE DATABASE [WebFormsAssignment]
+GO
+USE [WebFormsAssignment]
+GO
+/****** Object:  Table [dbo].[Customers] ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customers](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Address] [varchar](200) NOT NULL,
+ CONSTRAINT [PK__Customer__3214EC076C7CC340] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Orders] ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Number] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Amount] [int] NOT NULL,
+	[Description] [varchar](200) NULL,
+	[CustomerId] [int] NOT NULL,
+ CONSTRAINT [PK__Orders__3214EC07B8CDDA37] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Customers] FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customers] ([Id])
+GO
